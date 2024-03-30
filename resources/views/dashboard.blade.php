@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -23,78 +22,121 @@
     </style>
 
     <div class="container py-4">
-        <form method="post" action="{{ url('tasks') }}">
-            @csrf
-        <div class="row">
-            <div class="col-9">
-                <div class="alert alert-success rounded-3 shadow-sm" role="alert">
-                    Task assigned successfuCreate a new tCreate a new task.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <h4>Assign a Task</h4>
+        <div class="container">
+            <div class="row">
                 <div class="col">
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control rounded-3" id="taskName" placeholder="Task Name" name="name">
-                    </div>
-
-                    <div class="col">
-                        <select class="form-select rounded-3" id="assignedTo" name="user_id">
-                            <option selected disabled>Select User</option>
-                            <option value="1">User 1</option>
-                            <option value="2">User 2</option>
-                            <option value="3">User 3</option>
-                        </select>
-                    </div>
-                    <div class="d-grid">
-                        <button class="btn btn-outline-secondary rounded-3 mt-3" type="submit">Assign
-                            Task</button>
-                    </div>
-                </div>
-                <hr>
-                <div class="mt-3">
-                    <!-- Task List will be displayed here -->
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card border rounded-0">
-                    <div class="card-header bg-transparent border-0">
-                        <h5 class="mb-0">Search Users</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-3">
-                            <input placeholder="Search users..." class="form-control rounded-0 mb-3" type="text"
-                                id="searchUsers">
-                            <button class="btn btn-dark rounded-3 w-100">Search</button>
+                    <div class="card">
+                        <div class="card-body">
+                            Total Users
+                            <div class="row">
+                                {{ $users }}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-transparent border-0 pt-3">
-                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark rounded-bottom border border-dark" href="/users/create">
-                                <span>Create User</span>
-                            <style/a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link rounded-bottom border border-dark" href="/users">
-                                <span>Manage Users</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link rounded-bottom border border-dark" href="/tasks/create">
-                                <span>Create Task</span>
-                            </a>
-                        </li>
-                        <li class="nav-item rounded-bottom border border-dark">
-                            <a class="nav-link" href="/tasks">
-                                <span>Manage Tasks</span>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div style="border: 1px solid #111111; padding: 10px;">
+                                <h5 class="card-title text-center" style="font-weight: bold; text-align: center;">Total Tasks</h5>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p>Today's Tasks:</p>
+                                    <p>{{ $today_tasks }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>Total Tasks:</p>
+                                    <p>{{ $total_tasks }}</p>
+                                </div>
+
+                                <div class="col">
+                                    <p>My Tasks:</p>
+                                    <p>{{ $user_tasks_count }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        </form>
     </div>
+
+    <div class="container py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div style="border: 1px solid #111111; padding: 10px;">
+                    <h5 class="card-title text-center" style="font-weight: bold; text-align: center;"> 5 tasks</h5>
+                            </div>
+                            <div id="top-five-tasks-header"></div>
+                            <div id="top-five-tasks"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getTopFiveTasks() {
+            const tasksUrl = @json(url('top-five')); // Replace with your tasks URL
+
+            const url = @json(url(''))
+
+            fetch(tasksUrl)
+                .then(response => response.json())
+                .then(data => {
+                    //setting table headers
+                    const headers=`<div class="row mt-3">
+                             <div class="col">
+                               <p> <b>ID</b></p>
+                            </div>
+                            <div class="col">
+                                <p><b>Task Name</b></p>
+                            </div>
+                            <div class="col">
+                                <b>Assigned To</b>
+                            </div>
+                            <div class="col">
+                                <b>Created at</b>
+                            </div>
+                            <div class="col">
+                            <b>Action</b>
+                            </div>
+                        </div> `
+
+                    document.getElementById('top-five-tasks-header').innerHTML = headers;
+
+                    let topFiveTasksHTML = '';
+                    data.forEach(task => {
+                        topFiveTasksHTML += `<div class="row mt-3">
+                            <div class="col">
+                                <p>${task.id}</p>
+                            </div>
+                            <div class="col">
+                                <p>${task.name}</p>
+                            </div>
+                            <div class="col">
+                                <p>${task.user?.name || 'delvin problem'}</p>
+                            </div>
+                            <div class="col">
+                                <p>${task.created_at}</p>
+                            </div>
+                            <div class="col">
+                                <p><a href="${url}/tasks/${task.id}" class="btn btn-primary">Action</a></p>
+                            </div>
+                        </div>`;
+                    });
+                    document.getElementById('top-five-tasks').innerHTML = topFiveTasksHTML;
+                })
+                .catch(error => {
+                    console.error('Error fetching tasks:', error);
+                });
+        }
+
+        getTopFiveTasks();
+    </script>
 @endsection

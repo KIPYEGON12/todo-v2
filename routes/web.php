@@ -5,6 +5,7 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AssignedTasksController;
 use App\Http\Controllers\CompletedTasksController;
+use App\Http\Controllers\UsersController;
 
 Auth::routes();
 
@@ -33,7 +34,19 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/tasks', [TasksController::class,'store'])->name('tasks.store');
 
-    Route::delete('/tasks/{$task}', [TasksController::class,'destroy'])->name('tasks.destroy');
+    Route::delete('/tasks/{id}', [TasksController::class,'destroy'])->name('tasks.destroy');
+
+    Route::get('/tasks/{id}', [TasksController::class,'show'])->name('tasks.show');
+
+    Route::put('/tasks/{id}', [TasksController::class,'update'])->name('tasks.update');
+
+    Route::post('/tasks/edit/{id}', [TasksController::class,'edit'])->name('tasks.edit');
+
+    Route::get('/top-five/', [DashboardController::class,'topFiveTasks']);
+
+    Route::get('/users/index', [UsersController::class,'index']);
+
+    Route::resource('/users', UsersController::class);
 
 });
 

@@ -1,5 +1,5 @@
-
 @extends('layouts.app')
+
 @section('content')
 
     <style>
@@ -40,10 +40,10 @@
 
                     <div class="col">
                         <select class="form-select rounded-3" id="assignedTo" name="user_id">
-                            <option selected disabled>Select User</option>
-                            <option value="1">User 1</option>
-                            <option value="2">User 2</option>
-                            <option value="3">User 3</option>
+                            <option disabled>Select User</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="d-grid">

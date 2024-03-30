@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -21,9 +22,10 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
 
-        return  view('tasks.create');
+        $tasks = Task::all();
+        return  view('tasks.create', compact('users'));
     }
 
     /**
@@ -32,8 +34,8 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' =>'required',
-            'user_id' =>'required',
+            'name' => 'required',
+            'user_id' => 'required',
         ]);
         $task = Task::create($request->all());
 
@@ -45,7 +47,8 @@ class TasksController extends Controller
      */
     public function show(string $id)
     {
-
+        $task = Task::find($id);
+        return view('tasks.show', compact('task'));
     }
 
     /**
@@ -53,7 +56,9 @@ class TasksController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users = User::all();
+        $task = Task::find($id);
+        return view('tasks.edit', compact('task', 'users'));
     }
 
     /**
@@ -61,7 +66,15 @@ class TasksController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'user_id' => 'required',
+        ]);
+        $task = Task::find($id);
+
+        $task->update($request->all());
+
+        return redirect()->to('tasks');
     }
 
     /**
@@ -69,6 +82,8 @@ class TasksController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+    $task = Task::findOrFail($id);
+        $task->delete();
+        return redirect()->to('tasks');
     }
 }

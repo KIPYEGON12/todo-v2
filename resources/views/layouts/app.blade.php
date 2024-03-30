@@ -156,11 +156,12 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-                    @include('layouts.sidenav')
-                </div>
-
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 my-4">
+                @if (!request()->is('login','register','password/reset','users/create',))
+                    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+                        @include('layouts.sidenav')
+                    </div>
+                @endif
+                <main class="col-md-9 ms-sm-auto col-lg-{{ !request()->is('login', ('register')) ? '10' : '12' }} px-md-4 my-4">
                     @yield('content')
                 </main>
             </div>
