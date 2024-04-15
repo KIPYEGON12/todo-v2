@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class TasksController extends Controller
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        $roles = Role::all();
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -24,8 +24,8 @@ class TasksController extends Controller
     {
         $users = User::all();
 
-        $tasks = Task::all();
-        return  view('tasks.create', compact('users'));
+        $roles = Role::all();
+        return  view('roles.create', compact('users'));
     }
 
     /**
@@ -37,9 +37,9 @@ class TasksController extends Controller
             'name' => 'required',
             'user_id' => 'required',
         ]);
-        $task = Task::create($request->all());
+        $role = Role::create($request->except('_token'));
 
-        return redirect()->to('tasks');
+        return redirect()->to('roles');
     }
 
     /**
@@ -47,10 +47,8 @@ class TasksController extends Controller
      */
     public function show(string $id)
     {
-        $task = Task::findOrFail($id);
-        // dd($task->user_id);
-        // dd(User::find($task->user_id));
-        return view('tasks.show', compact('task'));
+        $role = Role::findOrFail($id);
+        return view('roles.show', compact('role'));
     }
 
     /**
@@ -59,8 +57,8 @@ class TasksController extends Controller
     public function edit(string $id)
     {
         $users = User::all();
-        $task = Task::find($id);
-        return view('tasks.edit', compact('task', 'users'));
+        $role = Role::find($id);
+        return view('roles.edit', compact('role', 'users'));
     }
 
     /**
@@ -72,11 +70,11 @@ class TasksController extends Controller
             'name' => 'required',
             'user_id' => 'required',
         ]);
-        $task = Task::find($id);
+        $role = Role::find($id);
 
-        $task->update($request->all());
+        $role->update($request->all());
 
-        return redirect()->to('tasks');
+        return redirect()->to('roles');
     }
 
     /**
@@ -84,8 +82,8 @@ class TasksController extends Controller
      */
     public function destroy(string $id)
     {
-    $task = Task::findOrFail($id);
-        $task->delete();
-        return redirect()->to('tasks');
+    $role = Role::findOrFail($id);
+        $role->delete();
+        return redirect()->to('roles');
     }
 }

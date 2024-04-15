@@ -31,10 +31,21 @@
                             <td>{{ $user->email }}</td>
                             <td>Admin</td>
                             <td>
-                                <button class="btn btn-primary btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                                <button class="btn btn-warning btn-sm">View</button>
-
+                                <h2 class="card-title">
+                                    <span>Created by:{{ $user->user->name ?? 'N/A' }}</span>
+                                    <span class=text-success>(#{{ $user->user_id }})</span>
+                                </h2>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                    <form method="post" action="{{ route('users.destroy', $user->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <!-- Add more rows for additional users -->

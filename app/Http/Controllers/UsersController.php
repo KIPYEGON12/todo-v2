@@ -30,7 +30,14 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' =>'required',
+            'email' =>'required',
+        ]);
+
+        User::create($request->all());
+
+        return redirect()->to('users');
     }
 
     /**
@@ -38,7 +45,8 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -46,7 +54,8 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -54,7 +63,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' =>'required',
+            'email' =>'required',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return redirect()->to('users');
     }
 
     /**
@@ -62,7 +79,10 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->to('users');
     }
 
     public function allUsers()
