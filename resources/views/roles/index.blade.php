@@ -10,30 +10,45 @@
         </div>
     </div>
 
-    {{-- @dd($roles) --}}
-    @foreach ($roles as $role)
 
-    <div class="role">
-        <h2>{{ $role->name }}</h2>
-        <h2 class="card-title">
-            <span>Created by:{{ $role->user->name }}</span>
-            <span class=text-success>(#{{ $role->user_id }})</span>
-        </h2>
-        <div class="d-flex gap-1">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Role</th>
+                    <th>Permission</th>
+                    <th>Created By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($roles as $role)
+                <tr>
+                    <td>{{ $role->id }}</td>
+                    <td>{{ $role->name }}</td>
+                    <td>{{  $role->permission->name ?? 'N/A' }}</td>
+                    <td>{{ $role->person->name  }}</td>
+                    <td class="d-flex gap-1">
+                <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">Edit</a>
 
-            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('roles.show', $role->id) }}" class="btn btn-warning">View</a>
 
-            <a href="{{ route('roles.show', $role->id) }}" class="btn btn-warning">View</a>
-
-            <form  method="post" action="{{ route('roles.destroy', $role->id) }}">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        </div>
-
+                {{-- @dd(route('roles.destroy', $role->id)) --}}
+                <form  method="post" action="{{ route('roles.destroy', $role->id) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+            </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    @endforeach
+            {{-- @dd($roles) --}}
+
 </div>
+
 
 @endsection

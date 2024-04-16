@@ -38,6 +38,14 @@
                         <input type="text" class="form-control rounded-3" id="roleName" placeholder="role Name" name="name">
                     </div>
 
+                    <div class="col mb-3">
+                        <select class="form-select rounded-3" id="assignedTo" name="permission_id">
+                            <option disabled>Select Permission</option>
+                            @foreach($permissions as $permission)
+                                <option value="{{ $permission->id }}">{{ $permission->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col">
                         <select class="form-select rounded-3" id="assignedTo" name="user_id">
                             <option disabled>Select User</option>
@@ -46,6 +54,7 @@
                             @endforeach
                         </select>
                     </div>
+
                     <div class="d-grid">
                         <button class="btn btn-outline-secondary rounded-3 mt-3" type="submit">Assign
                             role</button>

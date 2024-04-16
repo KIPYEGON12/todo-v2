@@ -17,4 +17,10 @@ class Permission extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

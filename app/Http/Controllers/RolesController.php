@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,9 +24,9 @@ class RolesController extends Controller
     public function create()
     {
         $users = User::all();
-
+        $permissions = Permission::all();
         $roles = Role::all();
-        return  view('roles.create', compact('users'));
+        return  view('roles.create', compact('users', 'permissions'));
     }
 
     /**
@@ -57,8 +58,9 @@ class RolesController extends Controller
     public function edit(string $id)
     {
         $users = User::all();
+        $permissions = Permission::all();
         $role = Role::find($id);
-        return view('roles.edit', compact('role', 'users'));
+        return view('roles.edit', compact('role', 'users', 'permissions'));
     }
 
     /**

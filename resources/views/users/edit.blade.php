@@ -37,6 +37,8 @@
                                 name="email" value="{{ $user->email }}">
                         </div>
 
+                        <div> User ID : {{ $user->user_id }}</div>
+
                         <!-- Add other user fields as needed -->
 
                         <div class="d-grid">

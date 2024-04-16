@@ -45,6 +45,7 @@
                                 <option value="{{ $user->id }}" @if($user->id == $permission->user_id) selected @endif>{{ $user->name }}</option>
                             @endforeach
                         </select>
+                        <div> User ID : {{ $permission->user_id }}</div>
                     </div>
                     <div class="d-grid">
                         <button class="btn btn-outline-secondary rounded-3 mt-3" type="submit">Update permission</button>
