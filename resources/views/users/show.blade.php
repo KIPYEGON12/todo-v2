@@ -15,12 +15,14 @@
                             <p class="card-text">Created at: {{ date('M d, Y', strtotime($user->created_at)) }}</p>
                             <!-- You can customize the date format based on your preference -->
                             <!-- Add more task details as needed -->
-                            <div class="d-flex gap-1">
+                            <hr>
+                            <div class="d-flex gap-1 align-items-center">
+                                <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">Back to Roles list</a>
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <form method="post" action="{{ route('users.destroy', $user->id) }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </div>
                         </div>
@@ -31,6 +33,14 @@
 </div>
 @endsection
 
+
+<script>
+function popup()
+{
+    alert("Are you sure you want to delete this user?");
+}
+
+    </script>
 
 
 

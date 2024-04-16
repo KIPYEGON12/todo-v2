@@ -11,17 +11,18 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ $permission->name }}</h5>
-                            <h5 class="card-title">created by:{{ $permission->user->name }}</h5>
+                            <h5 class="card-title">created by:{{ $permission->user->name ?? 'N/A' }}</h5>
                             <p class="card-text">Assigned To: {{ $permission->assigned_to }}</p>
                             <p class="card-text">Created at: {{ date('M d, Y', strtotime($permission->created_at)) }}</p>
                             <!-- You can customize the date format based on your preference -->
                             <!-- Add more permission details as needed -->
-                            <div class="d-flex gap-1">
+                            <div class="d-flex gap-1 align-items-center">
+                                <a href="{{ route('permissions.index')}}" class="btn btn-secondary btn-sm">Back To Permissions</a>
                                 <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <form method="post" action="{{ route('permissions.destroy', $permission->id) }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </div>
                         </div>

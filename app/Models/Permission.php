@@ -22,5 +22,9 @@ class Permission extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function person()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 }

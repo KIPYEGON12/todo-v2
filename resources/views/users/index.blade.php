@@ -30,26 +30,28 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>Admin</td>
-                            <td>
-                                <h2 class="card-title">
-                                    <span>Created by:{{ $user->user->name ?? 'N/A' }}</span>
-                                    <span class=text-success>(#{{ $user->user_id }})</span>
-                                </h2>
-                            </td>
+
                             <td>
                                 <div class="d-flex gap-1">
+                                    @if ($user->id ==    auth()->id())
+
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                    @else
+
                                     <form method="post" action="{{ route('users.destroy', $user->id) }}">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="popup()">Delete</button>
                                     </form>
+                                    @endif
                                 </div>
+
                             </td>
                         </tr>
-                        <!-- Add more rows for additional users -->
-                    @endforeach
+                        @endforeach
                 </tbody>
             </table>
         </div>
@@ -76,3 +78,12 @@
     </div>
     </div>
 @endsection
+
+<script>
+    function popup()
+    {
+        alert("Are you sure you want to delete this user?");
+    }
+
+
+</script>

@@ -14,7 +14,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::with('person')->get();
+
         return view('roles.index', compact('roles'));
     }
 
@@ -39,7 +40,6 @@ class RolesController extends Controller
             'user_id' => 'required',
         ]);
         $role = Role::create($request->except('_token'));
-
         return redirect()->to('roles');
     }
 

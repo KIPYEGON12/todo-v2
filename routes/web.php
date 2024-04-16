@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/completed-tasks', [CompletedTasksController::class,'index']);
 
-    Route::get('/tasks', [TasksController::class,'index']);
+    Route::get('/tasks', [TasksController::class,'index'])->name('tasks.index');
 
     Route::get('/tasks/create', [TasksController::class,'create']);
 

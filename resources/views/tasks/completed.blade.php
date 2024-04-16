@@ -1,7 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        background-color: #007bff;
+        color: #fff;
+        border: rounded solid;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1rem;
+    }
+
+    .btn:hover {
+        background-color: #0cc2b3;
+    }
+</style>
     <div>
+        <div class="d-flex justify-content-end">
+            <a class="nav-link d-flex align-items-center gap-2 btn" href="{{ url('tasks') }}">Back</a>
+        </div>
+
         <h1>Completed Tasks</h1>
         <div class="task">
             <h2>Email Follow-up</h2>

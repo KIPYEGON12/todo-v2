@@ -13,7 +13,8 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
+
+        $permissions = Permission::with('person')->get();
         return view('permissions.index', compact('permissions'));
     }
 
@@ -24,7 +25,7 @@ class PermissionsController extends Controller
     {
         $users = User::all();
 
-        $permissions = Permission::all();
+        $permissions = Permission::with('person')->get();
         return  view('permissions.create', compact('users'));
     }
 

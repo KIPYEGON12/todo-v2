@@ -28,7 +28,7 @@
                     <td>{{ $role->id }}</td>
                     <td>{{ $role->name }}</td>
                     <td>{{  $role->permission->name ?? 'N/A' }}</td>
-                    <td>{{ $role->person->name  }}</td>
+                    <td>{{ $role->person->name ?? 'N/A'  }}</td>
                     <td class="d-flex gap-1">
                 <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">Edit</a>
 
