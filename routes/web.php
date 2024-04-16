@@ -5,6 +5,8 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AssignedTasksController;
 use App\Http\Controllers\CompletedTasksController;
+use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 
 Auth::routes();
@@ -40,13 +42,19 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/tasks/{id}', [TasksController::class,'update'])->name('tasks.update');
 
-    Route::post('/tasks/edit/{id}', [TasksController::class,'edit'])->name('tasks.edit');
+    Route::get('/tasks/edit/{id}', [TasksController::class,'edit'])->name('tasks.edit');
 
     Route::get('/top-five/', [DashboardController::class,'topFiveTasks']);
 
     Route::get('/users/index', [UsersController::class,'index']);
 
     Route::resource('/users', UsersController::class);
+
+    Route::resource('/roles', RolesController::class);
+
+    Route::resource('/permissions', PermissionsController::class);
+
+
 
 });
 

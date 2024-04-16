@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class TasksController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        $permissions = Permission::all();
+        return view('permissions.index', compact('permissions'));
     }
 
     /**
@@ -24,8 +24,8 @@ class TasksController extends Controller
     {
         $users = User::all();
 
-        $tasks = Task::all();
-        return  view('tasks.create', compact('users'));
+        $permissions = Permission::all();
+        return  view('permissions.create', compact('users'));
     }
 
     /**
@@ -37,9 +37,9 @@ class TasksController extends Controller
             'name' => 'required',
             'user_id' => 'required',
         ]);
-        $task = Task::create($request->all());
+        $permission = Permission::create($request->except('_token'));
 
-        return redirect()->to('tasks');
+        return redirect()->to('permissions');
     }
 
     /**
@@ -47,10 +47,8 @@ class TasksController extends Controller
      */
     public function show(string $id)
     {
-        $task = Task::findOrFail($id);
-        // dd($task->user_id);
-        // dd(User::find($task->user_id));
-        return view('tasks.show', compact('task'));
+        $permission = Permission::findOrFail($id);
+        return view('permissions.show', compact('permission'));
     }
 
     /**
@@ -59,8 +57,8 @@ class TasksController extends Controller
     public function edit(string $id)
     {
         $users = User::all();
-        $task = Task::find($id);
-        return view('tasks.edit', compact('task', 'users'));
+        $permission = Permission::find($id);
+        return view('permissions.edit', compact('permission', 'users'));
     }
 
     /**
@@ -72,11 +70,11 @@ class TasksController extends Controller
             'name' => 'required',
             'user_id' => 'required',
         ]);
-        $task = Task::find($id);
+        $permission = Permission::find($id);
 
-        $task->update($request->all());
+        $permission->update($request->all());
 
-        return redirect()->to('tasks');
+        return redirect()->to('permissions');
     }
 
     /**
@@ -84,8 +82,8 @@ class TasksController extends Controller
      */
     public function destroy(string $id)
     {
-    $task = Task::findOrFail($id);
-        $task->delete();
-        return redirect()->to('tasks');
+    $permission = Permission::findOrFail($id);
+        $permission->delete();
+        return redirect()->to('permissions');
     }
 }
