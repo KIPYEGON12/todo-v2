@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="col mb-3">
-                        <select class="form-select rounded-3" id="assignedTo" name="permission_id">
+                        <select class="form-select rounded-3" id="assignedTo" multiple name="permission_ids[]">
                             <option disabled>Select Permission</option>
                             @foreach($permissions as $permission)
                                 <option value="{{ $permission->id }}">{{ $permission->name }}</option>

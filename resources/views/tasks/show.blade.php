@@ -11,8 +11,8 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ $task->name }}</h5>
-                            <h5 class="card-title">created by:{{ $task->name }}</h5>
-                            <p class="card-text">Assigned To: {{ $task->assigned_to }}</p>
+                            <h5 class="card-title">created by:{{ $task->user->name ?? 'N/A'}}</h5>
+                            <p class="card-text">Assigned To: {{ $creator->id ?? 'N/A'}}</p>
                             <p class="card-text">Created at: {{ date('M d, Y', strtotime($task->created_at)) }}</p>
                             <!-- You can customize the date format based on your preference -->
                             <!-- Add more task details as needed -->

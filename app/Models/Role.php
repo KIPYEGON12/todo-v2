@@ -12,6 +12,7 @@ class Role extends Model
         'name',
         'user_id',
         'permission_id', // Add this line
+        'permissions',
     ];
 
     public function user()
@@ -27,6 +28,8 @@ class Role extends Model
     public function permission()
     {
         return $this->belongsTo(Permission::class, 'permission_id');
+        // return $this->belongsToMany(Permission::class , 'permission_id');
+
     }
 
     public function person()

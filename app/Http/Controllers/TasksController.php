@@ -48,9 +48,10 @@ class TasksController extends Controller
     public function show(string $id)
     {
         $task = Task::findOrFail($id);
+        $creator = User::findOrFail($task->user_id);
         // dd($task->user_id);
         // dd(User::find($task->user_id));
-        return view('tasks.show', compact('task'));
+        return view('tasks.show', compact('task', 'creator'));
     }
 
     /**

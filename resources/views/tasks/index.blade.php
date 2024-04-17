@@ -26,7 +26,8 @@
                         <tr>
                             <td>{{ $task->id }}</td>
                             <td>{{ $task->name }}</td>
-                            <td>{{ $task->permission->name ?? 'N/A' }}</td>
+                            <td>{{ $task->user->name ?? 'N/A' }}</td>
+                            {{-- <td>{{ $task->permission->name ?? 'N/A' }}</td> --}}
                             {{-- <td>{{ $task->person->name  }}</td> --}}
                             <td class="d-flex gap-1">
                                 <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary">Edit</a>

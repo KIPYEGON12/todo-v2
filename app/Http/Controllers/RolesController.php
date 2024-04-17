@@ -35,11 +35,26 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'user_id' => 'required',
         ]);
-        $role = Role::create($request->except('_token'));
+
+        // Extract data from the request
+        $data = $request->only(['name', 'user_id', 'permission_ids']);
+
+
+        // Serialize permissions
+        $permissions = json_encode($data['permission_ids']);
+
+        // Create the role
+        $role = Role::create([
+            'name' => $data['name'],
+            'user_id' => $data['user_id'],
+            'permissions' => $permissions
+        ]);
+
         return redirect()->to('roles');
     }
 
@@ -49,7 +64,10 @@ class RolesController extends Controller
     public function show(string $id)
     {
         $role = Role::findOrFail($id);
-        return view('roles.show', compact('role'));
+        $decoded_perms = json_decode($role->permissions) ?? [];
+        $permissions = Permission::whereIn('id', $decoded_perms)->get();
+
+        return view('roles.show', compact('role', 'permissions'));
     }
 
     /**
@@ -59,32 +77,48 @@ class RolesController extends Controller
     {
         $users = User::all();
         $permissions = Permission::all();
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
         return view('roles.edit', compact('role', 'users', 'permissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        // Validate the request data
         $this->validate($request, [
             'name' => 'required',
             'user_id' => 'required',
         ]);
-        $role = Role::find($id);
 
-        $role->update($request->all());
+        // Extract data from the request
+        $data = $request->only(['name', 'user_id', 'permission_ids']);
 
+        // Serialize permissions
+        $permissions = json_encode($data['permission_ids']);
+
+        // Find the role by ID
+        $role = Role::findOrFail($id);
+
+        // Update the role with new data
+        $role->update([
+            'name' => $data['name'],
+            'user_id' => $data['user_id'],
+            'permissions' => $permissions
+        ]);
+
+        // Redirect to the roles page
         return redirect()->to('roles');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-    $role = Role::findOrFail($id);
+        $role = Role::findOrFail($id);
         $role->delete();
         return redirect()->to('roles');
     }

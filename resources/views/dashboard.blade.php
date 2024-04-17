@@ -27,9 +27,12 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            Total Users
                             <div class="row">
-                                {{ $users }}
+                                <div class="col">
+                                    <h4 style="font-weight: medium; color: #333;">Total Users</h4>
+                                    <hr>
+                                    <p style="font-weight: bold; font-size: 18px;">{{ $users }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -38,7 +41,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div style="border: 1px solid #111111; padding: 10px;">
-                                <h5 class="card-title text-center" style="font-weight: bold; text-align: center;">Total Tasks</h5>
+                                <h5 class="card-title text-center" style="font-weight: bold; text-align: center;">Total
+                                    Tasks</h5>
                             </div>
                             <div class="row mt-3">
                                 <div class="col">
@@ -69,7 +73,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div style="border: 1px solid #111111; padding: 10px;">
-                    <h5 class="card-title text-center" style="font-weight: bold; text-align: center;"> 5 tasks</h5>
+                                <h5 class="card-title text-center" style="font-weight: bold; text-align: center;"> 5 tasks
+                                </h5>
                             </div>
                             <div id="top-five-tasks-header"></div>
                             <div id="top-five-tasks"></div>
@@ -90,7 +95,7 @@
                 .then(response => response.json())
                 .then(data => {
                     //setting table headers
-                    const headers=`<div class="row mt-3">
+                    const headers = `<div class="row mt-3">
                              <div class="col">
                                <p> <b>ID</b></p>
                             </div>
