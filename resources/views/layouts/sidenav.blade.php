@@ -62,7 +62,7 @@
             </li>
         </ul>
 
-        <h6
+        {{-- <h6
             class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
             <span>Saved reports</span>
             <a class="link-secondary" href="#" aria-label="Add a new report">
@@ -104,7 +104,7 @@
                     Year-end sale
                 </a>
             </li>
-        </ul>
+        </ul> --}}
 
         <hr class="my-3">
 
