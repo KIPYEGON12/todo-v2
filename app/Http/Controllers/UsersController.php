@@ -22,7 +22,11 @@ class UsersController extends Controller
     public function create()
     {
         $users = User::all();
-        return  view('users.create', compact('users'));
+        $notification = array(
+            'message' => 'Successfully Done',
+            'alert-type' => 'success'
+        );
+        return  view('users.create', compact('users'))->with($notification);
     }
 
     /**

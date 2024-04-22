@@ -78,21 +78,26 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown d-flex">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=0D8ABC&color=fff"
+                            alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a href="{{ route('users.show', ['user' => auth()->user()->id]) }}" class="dropdown-item">View Profile</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="dropdown-item">
                                 @csrf
                                 <a href="#" class="dropdown-item"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    Logout
                                 </a>
                             </form>
                         </div>
+                    </li>
+
 
                     </li>
                 @endguest

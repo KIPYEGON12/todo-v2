@@ -38,7 +38,7 @@
                         <form  method="post" action="{{ route('permissions.destroy', $permission->id) }}">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="popup()">Delete</button>
                         </form>
                     </td>
                     </tr>
@@ -48,3 +48,8 @@
             </div>
         </div>
     @endsection
+    <script>
+        function popup() {
+            alert("Are you sure you want to delete this permission?");
+        }
+    </script>

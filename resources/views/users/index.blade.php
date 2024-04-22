@@ -33,25 +33,28 @@
 
                             <td>
                                 <div class="d-flex gap-1">
-                                    @if ($user->id ==    auth()->id())
-
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                    @if ($user->id == auth()->id())
+                                        <a href="{{ route('users.edit', $user->id) }}"
+                                            class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('users.show', $user->id) }}"
+                                            class="btn btn-warning btn-sm">View</a>
                                     @else
-
-                                    <form method="post" action="{{ route('users.destroy', $user->id) }}">
-                                        @csrf
-                                        @method('delete')
-                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="popup()">Delete</button>
-                                    </form>
+                                        <form method="post" action="{{ route('users.destroy', $user->id) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{{ route('users.edit', $user->id) }}"
+                                                class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('users.show', $user->id) }}"
+                                                class="btn btn-warning btn-sm">View</a>
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="popup()">Delete</button>
+                                        </form>
                                     @endif
                                 </div>
 
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -80,10 +83,7 @@
 @endsection
 
 <script>
-    function popup()
-    {
+    function popup() {
         alert("Are you sure you want to delete this user?");
     }
-
-
 </script>

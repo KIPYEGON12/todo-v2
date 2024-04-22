@@ -52,14 +52,14 @@
                     Reports
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="#">
                     <svg class="bi">
                         <use xlink:href="#puzzle" />
                     </svg>
                     Integrations
                 </a>
-            </li>
+            </li> --}}
         </ul>
 
         {{-- <h6
@@ -117,14 +117,14 @@
                     Settings
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="#">
                     <svg class="bi">
                         <use xlink:href="#door-closed" />
                     </svg>
                     Sign out
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/tasks', [TasksController::class,'index'])->name('tasks.index');
 
-    Route::get('/tasks/create', [TasksController::class,'create']);
+    Route::get('/tasks/create', [TasksController::class,'create'])->name('tasks.create');
 
     Route::post('/tasks', [TasksController::class,'store'])->name('tasks.store');
 

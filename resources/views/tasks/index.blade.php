@@ -6,7 +6,8 @@
         <div class="d-flex justify-content-between">
             <h1>All Tasks</h1>
             <div>
-                <a href="{{ url('tasks/create') }}" class="btn btn-primary btn-sm" style="font-weight: bold; border-radius: 0.2rem; padding: 0.25rem 0.5rem;">Create a new task</a>
+                <a href="{{ url('tasks/create') }}" class="btn btn-primary btn-sm"
+                    style="font-weight: bold; border-radius: 0.2rem; padding: 0.25rem 0.5rem;">Create a new task</a>
             </div>
         </div>
 
@@ -30,15 +31,15 @@
                             {{-- <td>{{ $task->permission->name ?? 'N/A' }}</td> --}}
                             {{-- <td>{{ $task->person->name  }}</td> --}}
                             <td class="d-flex gap-1">
-                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary btn-sm">Edit</a>
 
-                                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-warning">View</a>
+                                <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-warning btn-sm">View</a>
 
                                 {{-- @dd(route('tasks.destroy', $task->id)) --}}
                                 <form method="post" action="{{ route('tasks.destroy', $task->id) }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="popup()">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -56,3 +57,9 @@
             </div>
         </div>
     @endsection
+
+    <script>
+        function popup() {
+            alert("Are you sure you want to delete this task?");
+        }
+    </script>

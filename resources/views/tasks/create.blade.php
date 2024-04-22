@@ -22,6 +22,13 @@
     </style>
 
     <div class="container py-4">
+
+        @if (session('notification'))
+            <div class="alert alert-{{ session('notification.alert-type') }}">
+                {{ session('notification.message') }}
+            </div>
+        @endif
+
         <form method="post" action="{{ url('tasks') }}">
             @csrf
             <div class="row">
@@ -49,7 +56,7 @@
                                     </div>
                                     <hr>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <button class="btn btn-outline-primary rounded-3 btn-sm" type="submit">Assign
+                                        <button class="btn btn-outline-primary rounded-3 btn-sm" type="submit">Create
                                             Task</button>
                                         <a href="{{ route('tasks.index') }}" class="btn btn-secondary btn-sm">Back To
                                             Tasks</a>
@@ -66,4 +73,37 @@
                 </div>
         </form>
     </div>
+@endsection
+@section('scripts')
+    @if (session('notification'))
+        <script>
+            var type = "{{ session('notification.alert-type', 'info') }}";
+            var message = "{{ session('notification.message') }}";
+
+            switch (type) {
+                case 'info':
+                    toastr.info(message);
+                    break;
+                case 'success':
+                    toastr.success(message);
+                    break;
+                case 'warning':
+                    toastr.warning(message);
+                    break;
+                case 'error':
+                    toastr.error(message);
+                    break;
+            }
+        </script>
+    @endif
+{{-- 
+     <script>
+        $(document).ready(function() {
+            // Toastr options
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            };
+        });
+    </script> --}}
 @endsection

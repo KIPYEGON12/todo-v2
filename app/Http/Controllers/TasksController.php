@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class TasksController extends Controller
 {
@@ -25,7 +26,8 @@ class TasksController extends Controller
         $users = User::all();
 
         $tasks = Task::all();
-        return  view('tasks.create', compact('users'));
+
+        return  view('tasks.create', compact('users',));
     }
 
     /**
@@ -38,6 +40,7 @@ class TasksController extends Controller
             'user_id' => 'required',
         ]);
         $task = Task::create($request->all());
+        Toastr::success('Successfully Done', 'Success');
 
         return redirect()->to('tasks');
     }
@@ -85,7 +88,7 @@ class TasksController extends Controller
      */
     public function destroy(string $id)
     {
-    $task = Task::findOrFail($id);
+        $task = Task::findOrFail($id);
         $task->delete();
         return redirect()->to('tasks');
     }

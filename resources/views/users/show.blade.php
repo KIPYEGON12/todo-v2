@@ -17,15 +17,20 @@
                                 <!-- Add more task details as needed -->
                                 <hr>
                                 <div class="d-flex gap-1 align-items-center">
-                                    <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">Back to Roles
-                                        list</a>
+                                     @if ($user->id ==    auth()->id())
+
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                    @else
 
                                     <form method="post" action="{{ route('users.destroy', $user->id) }}">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="popup()">Delete</button>
                                     </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
