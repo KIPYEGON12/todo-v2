@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Http\Request;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class RolesController extends Controller
 {
@@ -54,6 +55,8 @@ class RolesController extends Controller
             'user_id' => $data['user_id'],
             'permissions' => $permissions
         ]);
+        Toastr::success('Successfully Created', 'Success');
+
 
         return redirect()->to('roles');
     }

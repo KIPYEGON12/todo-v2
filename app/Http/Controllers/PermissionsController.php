@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Http\Request;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class PermissionsController extends Controller
 {
@@ -39,6 +40,8 @@ class PermissionsController extends Controller
             'user_id' => 'required',
         ]);
         $permission = Permission::create($request->except('_token'));
+        Toastr::success('Successfully Created', 'Success');
+
 
         return redirect()->to('permissions');
     }

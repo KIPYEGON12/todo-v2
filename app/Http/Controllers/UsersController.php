@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class UsersController extends Controller
 {
@@ -40,6 +41,8 @@ class UsersController extends Controller
         ]);
 
         User::create($request->all());
+        Toastr::success('Successfully Done', 'Success');
+
 
         return redirect()->to('users');
     }

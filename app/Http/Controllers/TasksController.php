@@ -40,7 +40,7 @@ class TasksController extends Controller
             'user_id' => 'required',
         ]);
         $task = Task::create($request->all());
-        Toastr::success('Successfully Done', 'Success');
+        Toastr::success('Successfully Created', 'Success');
 
         return redirect()->to('tasks');
     }
