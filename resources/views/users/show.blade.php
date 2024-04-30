@@ -20,7 +20,7 @@
                                      @if ($user->id ==    auth()->id())
 
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                                    {{-- <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">View</a> --}}
                                     @else
 
                                     <form method="post" action="{{ route('users.destroy', $user->id) }}">

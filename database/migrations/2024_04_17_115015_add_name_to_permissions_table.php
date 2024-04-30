@@ -8,20 +8,28 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up(): void
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->string('name');
+            // Check if the 'name' column doesn't already exist
+            if (!Schema::hasColumn('permissions', 'name')) {
+                $table->string('name');
+            }
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down(): void
     {
         Schema::table('permissions', function (Blueprint $table) {
+            // Drop the 'name' column if it exists
             $table->dropColumn('name');
         });
     }
